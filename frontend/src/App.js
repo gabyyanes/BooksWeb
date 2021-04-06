@@ -67,6 +67,7 @@ function App() {
             component={ProfileScreen}
           ></PrivateRoute>
           <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
         </main>
         <footer className="footer1">All right reserved</footer>
       </div>

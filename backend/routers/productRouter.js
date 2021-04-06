@@ -8,15 +8,21 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
-    res.send(products);
+    const pageSize = 3;
+    const page = Number(req.query.pageNumber) || 1;
+    const count = await Product.count({});
+    const products = await Product.find({})
+      .skip(pageSize* (page-1))
+      .limit(pageSize)
+      ;
+    res.send({products, page, pages: Math.ceil(count / pageSize) });
   })
 );
 
 productRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-    // await Product.remove({});
+     await Product.remove({});
     const createdProducts = await Product.insertMany(data.products);
     res.send({ createdProducts });
   })

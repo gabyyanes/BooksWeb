@@ -77,7 +77,7 @@ const data = {
       price: 8.99,
       countInStock: 12,
       rating: 4.5,
-      description: "by J.K. Rowling, Mary GrandPre (Illustrator)",
+      description: "1997 novel by British author J.K. Rowling, Mary GrandPre (Illustrator)",
       genre: "fantasy",
       release_date: new Date("<1997-06-26>"),
     },
