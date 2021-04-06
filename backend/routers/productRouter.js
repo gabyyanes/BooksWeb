@@ -8,7 +8,7 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const pageSize = 3;
+    const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1;
     const count = await Product.count({});
     const products = await Product.find({})
@@ -22,7 +22,7 @@ productRouter.get(
 productRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-     await Product.remove({});
+    // await Product.remove({});
     const createdProducts = await Product.insertMany(data.products);
     res.send({ createdProducts });
   })
