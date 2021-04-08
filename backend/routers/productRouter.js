@@ -8,14 +8,29 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
+    const name = req.query.name || '';
+    const genre = req.query.genre || '';
     const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1;
+    const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+    const genreFilter = genre ? { genre } : {};
     const count = await Product.count({});
-    const products = await Product.find({})
+    const products = await Product.find({ 
+      ...nameFilter,
+      ...genreFilter,
+    })
       .skip(pageSize* (page-1))
       .limit(pageSize)
       ;
     res.send({products, page, pages: Math.ceil(count / pageSize) });
+  })
+);
+
+productRouter.get(
+  '/genres', 
+  expressAsyncHandler(async (req, res) => {
+    const genres = await Product.find().distinct('genre');
+    res.send(genres);
   })
 );
 

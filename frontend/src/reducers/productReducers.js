@@ -5,6 +5,9 @@ const {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_GENRE_LIST_SUCCESS,
+  PRODUCT_GENRE_LIST_REQUEST,
+  PRODUCT_GENRE_LIST_FAIL,
 } = require('../constants/productConstants');
 
 export const productListReducer = (
@@ -22,6 +25,24 @@ export const productListReducer = (
         page: action.payload.page,
     };
     case PRODUCT_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productGenreListReducer = (
+  state = { loading: true, products: [] },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_GENRE_LIST_REQUEST:
+      return { loading: true };
+    case PRODUCT_GENRE_LIST_SUCCESS:
+      return { 
+        loading: false, 
+        genres: action.payload };
+    case PRODUCT_GENRE_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

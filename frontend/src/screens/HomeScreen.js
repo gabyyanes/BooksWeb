@@ -32,23 +32,25 @@ export default function HomeScreen(props) {
   return (
     <div>
       <img className="homeimage" src="./images/banner.jpg" alt="banner" />;
+
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-        <div className="row center">
-          {products.map((product) => (
-            <Product key={product._id} product={product}></Product>
-          ))}
-        </div>
-        <div className="row center pagination" >
-          {[...Array(pages).keys()].map(x => (
-            <Link key={x + 1} to={getFilterUrl({page: x+1 })}>{x + 1}
-            </Link>
-          ))}
-        </div>
+          {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
+          <div className="row center">
+            {products.map((product) => (
+              <Product key={product._id} product={product}></Product>
+            ))}
+          </div>
+          <div className="row center pagination" >
+            {[...Array(pages).keys()].map(x => (
+              <Link key={x + 1} to={getFilterUrl({page: x+1 })}>{x + 1}
+              </Link>
+            ))}
+          </div>
         </>
       )}
     </div>
