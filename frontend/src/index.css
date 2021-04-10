@@ -410,9 +410,11 @@ input {
   border-right: none;
   margin-right: 0.5rem;
   margin-left: 0rem;
+  width:fit-content;
 }
 .search input {
   border-radius: 0.5rem 0 0 0.5rem;
   border-right: none;
   margin-left: 0.5rem;
+  width:fit-content;
 }

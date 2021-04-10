@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
+// eslint-disable-next-line
 import { listProductGenres, listProducts } from './actions/productActions';
 import { signout } from './actions/userActions';
 import LoadingBox from './components/LoadingBox';
@@ -52,7 +53,7 @@ function App() {
               Geektext
             </Link>
           </div>
-          <div>
+          <div className = "searchButton">
             <Route 
               render={({history}) => (
                 <SearchBox history={history}></SearchBox>

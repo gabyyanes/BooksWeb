@@ -80,7 +80,7 @@ userRouter.put(
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
-        isAdmin: updatedUser.isAdmin,
+        /*isAdmin: updatedUser.isAdmin,*/
         token: generateToken(updatedUser),
       });
     }

@@ -14,6 +14,7 @@ export default function HomeScreen(props) {
   } = useParams();
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
+  // eslint-disable-next-line
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function HomeScreen(props) {
 
   return (
     <div>
-      <img className="homeimage" src="./images/banner.jpg" alt="banner" />;
+      <img className="homeimage" src="./images/banner.jpg" alt="banner" />
 
       {loading ? (
         <LoadingBox></LoadingBox>
