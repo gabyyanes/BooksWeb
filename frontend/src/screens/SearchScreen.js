@@ -7,7 +7,11 @@ import MessageBox from '../components/MessageBox';
 import Product from '../components/Product';
 
 export default function SearchScreen(props) {
-    const {name = 'all', genre = 'all' } = useParams();
+    const {
+        name = 'all', 
+        genre = 'all', 
+        order = 'newest', 
+    } = useParams();
     const dispatch = useDispatch();
     const productList = useSelector(state => state.productList);
     const { loading, error, products} = productList;
@@ -23,14 +27,17 @@ export default function SearchScreen(props) {
             listProducts({ 
                 name: name !== 'all' ? name: '',
                 genre: genre !== 'all' ? genre: '',
+                order,
             })
         );
-    }, [genre, dispatch, name]);
+    }, [genre, dispatch, name, order,]);
     
     const getFilterUrl = (filter) => {
         const filterGenre = filter.genre || genre;
         const filterName = filter.name || name;
-        return `/search/genre/${filterGenre}/name/${filterName}`;
+        const sortOrder = filter.order || order;
+
+        return `/search/genre/${filterGenre}/name/${filterName}/order/${sortOrder}`;
     };
     return (
         <div>
@@ -42,6 +49,20 @@ export default function SearchScreen(props) {
                 ) : (
                     <div>{products.length} Results</div>
                 )}
+                <div>
+                    Sort by{' '}
+                    <select
+                        value={order}
+                        onChange={(e) => {
+                        props.history.push(getFilterUrl({ order: e.target.value }));
+                        }}
+                    >
+                        <option value="newest">Newest Arrivals</option>
+                        <option value="lowest">Price: Low to High</option>
+                        <option value="highest">Price: High to Low</option>
+                        <option value="toprated">Rating: High to Low</option>
+                    </select>
+                </div>
             </div>
             <div className="row top">
                 <div className="col-1">

@@ -139,6 +139,11 @@ function App() {
             component={SearchScreen} 
             exact
           ></Route>
+            <Route 
+            path="/search/genre/:genre/name/:name/order/:order" 
+            component={SearchScreen} 
+            exact
+          ></Route>
           <PrivateRoute
             path="/profile"
             component={ProfileScreen}

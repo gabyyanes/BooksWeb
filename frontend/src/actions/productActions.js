@@ -15,13 +15,14 @@ export const listProducts = ({
   pageNumber = '',
   name = '',
   genre = '',
+  order = '',
 }) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     const { data } = await Axios.get(
-      `/api/products?pageNumber=${pageNumber}&name=${name}&genre=${genre}`
+      `/api/products?pageNumber=${pageNumber}&name=${name}&genre=${genre}&order=${order}`
     );
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
